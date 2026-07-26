@@ -23,7 +23,10 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
   const increase = () => setQuantity((prev) => Math.min(99, prev + 1));
 
   return (
-    <article className="flex h-full flex-col rounded border border-[var(--border)] bg-surface p-4 sm:p-5">
+    <article
+      className="flex h-full flex-col rounded border border-[var(--border)] bg-surface p-4 sm:p-5"
+      aria-label={product.name}
+    >
       <div
         className="mb-4 flex h-28 items-center justify-center rounded bg-[var(--background)]"
         aria-hidden="true"
@@ -48,9 +51,9 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
         </span>
       </div>
 
-      <h3 className="text-lg font-semibold leading-snug text-[var(--text-primary)]">
+      <p className="text-lg font-semibold leading-snug text-[var(--text-primary)]">
         {product.name}
-      </h3>
+      </p>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
         {product.description}
       </p>
