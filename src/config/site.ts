@@ -1,6 +1,7 @@
 export const SITE_NAME = "La Ernestina";
 export const SITE_DESCRIPTION = "Forrajería & Alimentos";
-export const WHATSAPP_NUMBER = "5490000000000"; // demo number, replace in production
+/** Placeholder — WhatsApp checkout must stay blocked until replaced with a real number. */
+export const WHATSAPP_NUMBER = "5490000000000";
 export const PHONE = "Teléfono pendiente de configurar";
 export const ADDRESS = "Dirección del comercio pendiente de configurar";
 export const HOURS = "Horarios pendientes de configurar";
