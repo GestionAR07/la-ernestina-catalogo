@@ -1,6 +1,12 @@
-import { PRODUCTS } from "@/data/products";
 import { WHATSAPP_NUMBER } from "@/config/site";
 import type { Order } from "@/types/order";
+import { formatPrice } from "@/utils/format";
+import {
+  findProduct,
+  getLineSubtotal,
+  getOrderTotals,
+  getUnitPrice,
+} from "@/utils/orderTotals";
 
 const PLACEHOLDER_NUMBERS = new Set([
   "5490000000000",
@@ -20,17 +26,6 @@ export function isWhatsAppConfigured(number: string = WHATSAPP_NUMBER): boolean 
   return sanitizeWhatsAppNumber(number) !== null;
 }
 
-function formatPrice(price: number | undefined): string {
-  if (typeof price !== "number" || !Number.isFinite(price)) {
-    return "Consultar precio";
-  }
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
 export function buildWhatsAppMessage(order: Order): string {
   const lines: string[] = [
     "Hola, quiero hacer un pedido en La Ernestina:",
@@ -38,21 +33,36 @@ export function buildWhatsAppMessage(order: Order): string {
   ];
 
   for (const item of order.items) {
-    const product = PRODUCTS.find((p) => p.id === item.productId);
+    const product = findProduct(item.productId);
     const name = product?.name ?? item.productId;
     const brand = product?.brand ? ` (${product.brand})` : "";
+    const unit = formatPrice(getUnitPrice(item));
+    const subtotal = formatPrice(getLineSubtotal(item));
     lines.push(
-      `• ${name}${brand} — ${item.presentation} x${item.quantity} — ${formatPrice(product?.price)}`
+      `• ${name}${brand} — ${item.presentation} x${item.quantity} — unitario ${unit} — subtotal ${subtotal}`
     );
   }
 
+  const { knownSubtotal, hasUnknownPrices } = getOrderTotals(order);
   lines.push("");
+  if (hasUnknownPrices) {
+    lines.push(
+      `Total parcial estimado (solo ítems con precio): ${formatPrice(knownSubtotal)}`
+    );
+    lines.push("Hay ítems con precio a consultar.");
+  } else {
+    lines.push(`Total estimado: ${formatPrice(knownSubtotal)}`);
+  }
+
   lines.push(`Modalidad: ${order.deliveryOption}`);
 
   const observations = order.observations?.trim();
   if (observations) {
     lines.push(`Observaciones: ${observations}`);
   }
+
+  lines.push("");
+  lines.push("Por favor confirmen disponibilidad y el total final. Gracias.");
 
   return lines.join("\n");
 }
