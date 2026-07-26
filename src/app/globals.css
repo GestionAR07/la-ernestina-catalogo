@@ -1,27 +1,78 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* CSS Semantic Variables */
+/* CSS Semantic Variables — identidad visual La Ernestina */
 :root {
-  --background: #0B100D;          /* Fondo principal */
-  --surface: #131C17;            /* Superficies y tarjetas */
-  --primary: #2F6B4F;            /* Verde principal */
-  --primary-hover: #3D8061;      /* Verde hover */
-  --primary-soft: #8EAA79;       /* Verde suave */
-  --text-primary: #F2F4F0;       /* Texto principal */
-  --text-secondary: #A8B3AC;     /* Texto secundario */
-  --border: #273229;             /* Bordes */
-  --accent: #C9B483;             /* Acento cereal */
+  --background: #0b100d;
+  --surface: #131c17;
+  --primary: #2f6b4f;
+  --primary-hover: #3d8061;
+  --primary-soft: #8eaa79;
+  --text-primary: #f2f4f0;
+  --text-secondary: #a8b3ac;
+  --border: #273229;
+  --accent: #c9b483;
 }
 
-/* Utility classes using CSS variables */
+@theme inline {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-brand: var(--primary);
+  --color-brand-hover: var(--primary-hover);
+  --color-brand-soft: var(--primary-soft);
+  --color-ink: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-line: var(--border);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary-soft);
+    outline-offset: 2px;
+  }
+}
+
+/* Utility classes using CSS variables (compatibilidad con componentes existentes) */
 @layer utilities {
-  .bg-primary { background-color: var(--primary); }
-  .bg-surface { background-color: var(--surface); }
-  .bg-background { background-color: var(--background); }
-  .text-primary { color: var(--text-primary); }
-  .text-secondary { color: var(--text-secondary); }
-  .border-primary { border-color: var(--border); }
-  .accent { color: var(--accent); }
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  .bg-primary-hover {
+    background-color: var(--primary-hover);
+  }
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  .bg-background {
+    background-color: var(--background);
+  }
+  .text-primary {
+    color: var(--text-primary);
+  }
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+  .border-primary {
+    border-color: var(--border);
+  }
+  .accent {
+    color: var(--accent);
+  }
+  .font-manrope {
+    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  }
+  .scrollbar-thin-x {
+    scrollbar-width: thin;
+  }
 }
