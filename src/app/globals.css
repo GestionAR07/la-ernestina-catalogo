@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Semantic Variables */
+:root {
+  --background: #0B100D;          /* Fondo principal */
+  --surface: #131C17;            /* Superficies y tarjetas */
+  --primary: #2F6B4F;            /* Verde principal */
+  --primary-hover: #3D8061;      /* Verde hover */
+  --primary-soft: #8EAA79;       /* Verde suave */
+  --text-primary: #F2F4F0;       /* Texto principal */
+  --text-secondary: #A8B3AC;     /* Texto secundario */
+  --border: #273229;             /* Bordes */
+  --accent: #C9B483;             /* Acento cereal */
+}
+
+/* Utility classes using CSS variables */
+@layer utilities {
+  .bg-primary { background-color: var(--primary); }
+  .bg-surface { background-color: var(--surface); }
+  .bg-background { background-color: var(--background); }
+  .text-primary { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .border-primary { border-color: var(--border); }
+  .accent { color: var(--accent); }
+}
