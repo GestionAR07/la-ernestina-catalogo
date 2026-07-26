@@ -8,10 +8,12 @@ import { getOrderTotals } from "@/utils/orderTotals";
 
 interface SiteHeaderProps {
   onOpenOrder: () => void;
+  orderOpen: boolean;
+  drawerId: string;
 }
 
 export const SiteHeader = forwardRef<HTMLButtonElement, SiteHeaderProps>(
-  function SiteHeader({ onOpenOrder }, ref) {
+  function SiteHeader({ onOpenOrder, orderOpen, drawerId }, ref) {
     const { order, isHydrated } = useOrder();
     const { totalUnits } = getOrderTotals(order);
     const visibleCount = isHydrated ? totalUnits : 0;
@@ -37,10 +39,16 @@ export const SiteHeader = forwardRef<HTMLButtonElement, SiteHeaderProps>(
             onClick={onOpenOrder}
             className="inline-flex min-h-11 items-center gap-2 rounded bg-primary px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-soft)] sm:px-4"
             aria-label={`Abrir pedido, ${visibleCount} ${visibleCount === 1 ? "unidad" : "unidades"}`}
+            aria-expanded={orderOpen}
+            aria-controls={drawerId}
+            aria-haspopup="dialog"
           >
             <ShoppingCart className="h-5 w-5 shrink-0" aria-hidden="true" />
             <span className="hidden sm:inline">Pedido</span>
-            <span className="inline-flex min-w-6 items-center justify-center rounded bg-white/15 px-1.5 py-0.5 text-xs tabular-nums">
+            <span
+              className="inline-flex min-w-6 items-center justify-center rounded bg-white/15 px-1.5 py-0.5 text-xs tabular-nums"
+              data-testid="order-count"
+            >
               {visibleCount}
             </span>
           </button>

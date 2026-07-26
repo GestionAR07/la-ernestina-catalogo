@@ -27,13 +27,22 @@ interface OrderDrawerProps {
   open: boolean;
   onClose: () => void;
   returnFocusRef: React.RefObject<HTMLButtonElement | null>;
+  id?: string;
+  titleId?: string;
 }
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export function OrderDrawer({ open, onClose, returnFocusRef }: OrderDrawerProps) {
-  const titleId = useId();
+export function OrderDrawer({
+  open,
+  onClose,
+  returnFocusRef,
+  id,
+  titleId: titleIdProp,
+}: OrderDrawerProps) {
+  const generatedTitleId = useId();
+  const titleId = titleIdProp ?? generatedTitleId;
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const {
@@ -128,6 +137,7 @@ export function OrderDrawer({ open, onClose, returnFocusRef }: OrderDrawerProps)
       />
 
       <div
+        id={id}
         ref={panelRef}
         role="dialog"
         aria-modal="true"

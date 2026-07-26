@@ -3,8 +3,9 @@ import { SITE_DESCRIPTION, SITE_NAME } from "@/config/site";
 
 /**
  * Hero principal.
- * Nota de rendimiento: hero.png ~944 KB — conviene comprimir a WebP/AVIF en una fase posterior
- * sin cambiar el encuadre visual.
+ * Nota de rendimiento: el original `hero.png` (~944 KB, contenedor JPEG) se conserva.
+ * Esta fase sirve `hero.webp` (~191 KB, calidad 82) para reducir peso percibido sin cambiar el encuadre.
+ * AVIF (~94 KB) quedó generado en audit-artifacts para evaluación; no se adoptó aún por compatibilidad/verificación visual.
  */
 export function HeroSection() {
   return (
@@ -13,7 +14,7 @@ export function HeroSection() {
       className="relative isolate min-h-[70vh] overflow-hidden border-b border-[var(--border)]"
     >
       <Image
-        src="/images/hero/hero.png"
+        src="/images/hero/hero.webp"
         alt="Interior y productos de forrajería La Ernestina"
         fill
         priority

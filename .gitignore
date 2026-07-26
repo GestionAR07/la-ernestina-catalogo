@@ -44,3 +44,4 @@ next-env.d.ts
 audit-*.json
 dependency-tree-*.txt
 outdated-*.json
+/audit-artifacts/
