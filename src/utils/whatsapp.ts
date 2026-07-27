@@ -1,4 +1,4 @@
-import { WHATSAPP_NUMBER } from "@/config/site";
+import { SITE_NAME, WHATSAPP_NUMBER } from "@/config/site";
 import type { Order } from "@/types/order";
 import { formatPrice } from "@/utils/format";
 import {
@@ -28,7 +28,7 @@ export function isWhatsAppConfigured(number: string = WHATSAPP_NUMBER): boolean 
 
 export function buildWhatsAppMessage(order: Order): string {
   const lines: string[] = [
-    "Hola, quiero hacer un pedido en La Ernestina:",
+    `Hola, quiero hacer un pedido en ${SITE_NAME}:`,
     "",
   ];
 

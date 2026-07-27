@@ -1,9 +1,9 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import type { Product } from "@/types/product";
+import { getPresentationPrice, type Product } from "@/types/product";
 import { formatPrice } from "@/utils/format";
 
 interface ProductCardProps {
@@ -19,6 +19,11 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
   const outOfStock = product.stockStatus === "Sin stock";
   const canAdd = !outOfStock && presentation.length > 0;
 
+  const unitPrice = useMemo(
+    () => getPresentationPrice(product, presentation),
+    [product, presentation]
+  );
+
   const decrease = () => setQuantity((prev) => Math.max(1, prev - 1));
   const increase = () => setQuantity((prev) => Math.min(99, prev + 1));
 
@@ -26,6 +31,7 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
     <article
       className="flex h-full flex-col rounded border border-[var(--border)] bg-surface p-4 sm:p-5"
       aria-label={product.name}
+      data-product-id={product.id}
     >
       <div
         className="mb-4 flex h-28 items-center justify-center rounded bg-[var(--background)]"
@@ -58,8 +64,11 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
         {product.description}
       </p>
 
-      <p className="mt-4 text-base font-semibold text-[var(--text-primary)]">
-        {formatPrice(product.price)}
+      <p
+        className="mt-4 text-base font-semibold text-[var(--text-primary)]"
+        data-testid="product-unit-price"
+      >
+        {formatPrice(unitPrice)}
       </p>
 
       <div className="mt-4 space-y-3">
@@ -73,6 +82,7 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
               value={presentation}
               onChange={(event) => setPresentation(event.target.value)}
               className="min-h-11 w-full rounded border border-[var(--border)] bg-[var(--background)] px-3 text-sm text-[var(--text-primary)]"
+              data-testid="presentation-select"
             >
               {product.presentations.map((option) => (
                 <option key={option} value={option}>
@@ -130,6 +140,7 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
         <Button
           className="w-full"
           disabled={!canAdd}
+          data-testid="add-to-order"
           onClick={() => {
             if (!canAdd) return;
             onAdd(product.id, presentation, quantity);

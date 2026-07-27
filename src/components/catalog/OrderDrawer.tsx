@@ -22,6 +22,7 @@ import {
   isWhatsAppConfigured,
   openWhatsAppOrder,
 } from "@/utils/whatsapp";
+import { PENDING } from "@/config/site";
 
 interface OrderDrawerProps {
   open: boolean;
@@ -321,7 +322,7 @@ export function OrderDrawer({
           <p id="whatsapp-help" className="text-xs leading-relaxed text-[var(--text-secondary)]">
             {whatsappReady
               ? "Se abrirá WhatsApp con el detalle de tu pedido."
-              : "WhatsApp pendiente de configurar. El envío permanece bloqueado hasta cargar el número real del comercio."}
+              : `${PENDING.whatsapp}. El envío permanece bloqueado hasta cargar el número real del comercio.`}
           </p>
         </footer>
       </div>

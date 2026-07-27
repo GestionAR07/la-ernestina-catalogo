@@ -1,13 +1,18 @@
-import { PRODUCTS } from "@/data/products";
+import { getCatalogProducts } from "@/data/catalog";
 import type { Order, OrderItem } from "@/types/order";
-import type { Product } from "@/types/product";
+import {
+  getPresentationPrice,
+  type Product,
+} from "@/types/product";
 
 export function findProduct(productId: string): Product | undefined {
-  return PRODUCTS.find((product) => product.id === productId);
+  return getCatalogProducts().find((product) => product.id === productId);
 }
 
 export function getUnitPrice(item: OrderItem): number | undefined {
-  return findProduct(item.productId)?.price;
+  const product = findProduct(item.productId);
+  if (!product) return undefined;
+  return getPresentationPrice(product, item.presentation);
 }
 
 export function getLineSubtotal(item: OrderItem): number | undefined {

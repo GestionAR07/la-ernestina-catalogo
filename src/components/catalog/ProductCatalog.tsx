@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { PRODUCTS } from "@/data/products";
+import { getCatalogProducts } from "@/data/catalog";
 import { CATEGORIES } from "@/data/categories";
 import { useOrder } from "@/providers/OrderProvider";
 import { CategoryNav, type CategoryFilter } from "@/components/catalog/CategoryNav";
@@ -11,28 +11,29 @@ export function ProductCatalog() {
   const { addItem } = useOrder();
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("Todos");
   const [announcement, setAnnouncement] = useState("");
+  const catalog = useMemo(() => getCatalogProducts(), []);
 
   const counts = useMemo(() => {
     const map: Record<string, number> = {};
     for (const category of CATEGORIES) {
-      map[category] = PRODUCTS.filter((product) => product.category === category).length;
+      map[category] = catalog.filter((product) => product.category === category).length;
     }
     return map;
-  }, []);
+  }, [catalog]);
 
   const popular = useMemo(
-    () => PRODUCTS.filter((product) => product.isPopular),
-    []
+    () => catalog.filter((product) => product.isPopular),
+    [catalog]
   );
 
   const filtered = useMemo(() => {
-    if (activeCategory === "Todos") return PRODUCTS;
-    return PRODUCTS.filter((product) => product.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === "Todos") return catalog;
+    return catalog.filter((product) => product.category === activeCategory);
+  }, [activeCategory, catalog]);
 
   const handleAdd = (productId: string, presentation: string, quantity: number) => {
     addItem(productId, presentation, quantity);
-    const product = PRODUCTS.find((item) => item.id === productId);
+    const product = catalog.find((item) => item.id === productId);
     setAnnouncement(
       `${product?.name ?? "Producto"} (${presentation}) x${quantity} agregado al pedido`
     );
