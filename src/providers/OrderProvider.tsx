@@ -99,7 +99,10 @@ function readStoredOrder(): Order {
     const sanitized = sanitizeOrder(JSON.parse(stored));
     return sanitized ?? { ...DEFAULT_ORDER };
   } catch (error) {
-    console.error("Failed to parse order from localStorage", error);
+    // JSON corrupto / payload inválido esperado: recuperar en silencio en producción.
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Order localStorage recovery: discarded invalid payload", error);
+    }
     return { ...DEFAULT_ORDER };
   }
 }
@@ -108,6 +111,7 @@ function persistOrder(order: Order) {
   try {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(order));
   } catch (error) {
+    // Quota / privacy mode: no es un error de parseo esperado.
     console.error("Failed to save order to localStorage", error);
   }
 }
