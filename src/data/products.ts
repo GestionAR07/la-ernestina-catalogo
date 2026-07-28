@@ -4,10 +4,8 @@ export const PRODUCTS: Product[] = [
   {
     id: "p1",
     name: "Alimento para perro adulto",
-    brand: "Marca X",
     description: "Alimento balanceado para perros adultos, 15 kg.",
     category: "Perros",
-    imageUrl: "/images/products/perro_adulto.png",
     presentations: ["bolsa de 15 kg"],
     price: 1200,
     stockStatus: "Disponible",
@@ -16,7 +14,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p2",
     name: "Alimento para cachorro",
-    brand: "Marca Y",
     description: "Alimento especializado para cachorros en crecimiento, 15 kg.",
     category: "Perros",
     presentations: ["bolsa de 15 kg"],
@@ -27,7 +24,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p3",
     name: "Alimento para perro raza pequeña",
-    brand: "Marca Z",
     description: "Alimento formulado para razas pequeñas, 10 kg.",
     category: "Perros",
     presentations: ["bolsa de 10 kg"],
@@ -38,7 +34,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p4",
     name: "Alimento para gato adulto",
-    brand: "Marca A",
     description: "Alimento completo para gatos adultos, 10 kg.",
     category: "Gatos",
     presentations: ["bolsa de 10 kg"],
@@ -49,7 +44,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p5",
     name: "Alimento para gato castrado",
-    brand: "Marca B",
     description: "Fórmula especial para gatos castrados, 7.5 kg.",
     category: "Gatos",
     presentations: ["bolsa de 7.5 kg"],
@@ -59,7 +53,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p6",
     name: "Piedras sanitarias para gatos",
-    brand: "Marca C",
     description: "Piedras para la salud urinaria de los gatos, 4 kg.",
     category: "Gatos",
     presentations: ["bolsa de 4 kg"],
@@ -70,7 +63,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p7",
     name: "Maíz entero",
-    brand: "Marca D",
     description: "Maíz entero de alta calidad, 10 kg.",
     category: "Cereales y semillas",
     presentations: ["bolsa de 10 kg"],
@@ -81,7 +73,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p8",
     name: "Maíz partido",
-    brand: "Marca D",
     description: "Maíz partido ideal para mezclas, 10 kg.",
     category: "Cereales y semillas",
     presentations: ["bolsa de 10 kg"],
@@ -92,7 +83,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p9",
     name: "Alimento para gallinas ponedoras",
-    brand: "Marca E",
     description: "Alimento rico en proteínas para gallinas ponedoras, 25 kg.",
     category: "Aves",
     presentations: ["bolsa de 25 kg"],
@@ -103,7 +93,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p10",
     name: "Alimento iniciador para pollitos",
-    brand: "Marca E",
     description: "Alimento iniciador para pollitos en sus primeras semanas, 25 kg.",
     category: "Aves",
     presentations: ["bolsa de 25 kg"],
@@ -113,7 +102,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p11",
     name: "Mezcla de semillas para aves",
-    brand: "Marca F",
     description: "Mezcla variada de semillas para diferentes especies de aves, 5 kg.",
     category: "Aves",
     presentations: ["bolsa de 5 kg"],
@@ -124,7 +112,6 @@ export const PRODUCTS: Product[] = [
   {
     id: "p12",
     name: "Alimento balanceado para conejos",
-    brand: "Marca G",
     description: "Alimento balanceado para conejos adultos, 25 kg.",
     category: "Animales de granja",
     presentations: ["bolsa de 25 kg"],

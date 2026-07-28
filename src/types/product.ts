@@ -1,7 +1,8 @@
 export interface Product {
   id: string;
   name: string;
-  brand: string;
+  /** Marca comercial real; omitir si no hay dato confiable. */
+  brand?: string;
   description: string;
   category: string;
   imageUrl?: string;

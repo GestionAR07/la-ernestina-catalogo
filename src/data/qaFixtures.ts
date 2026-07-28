@@ -8,7 +8,6 @@ export const QA_FIXTURE_PRODUCTS: Product[] = [
   {
     id: "qa-multi-1",
     name: "[QA] Producto multi-presentación",
-    brand: "Fixture QA",
     description:
       "Producto temporal de prueba con dos presentaciones y precios distintos. No representa mercadería real.",
     category: "Ofertas",
