@@ -18,11 +18,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseClasses =
-      "inline-flex min-h-11 min-w-11 items-center justify-center rounded px-4 py-2 font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50";
+      "inline-flex min-h-11 min-w-11 items-center justify-center rounded-control px-4 py-2 font-medium motion-safe-transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-soft)] disabled:cursor-not-allowed disabled:opacity-50";
     const variantClasses = {
-      primary: "bg-primary text-white hover:bg-primary-hover",
-      secondary: "bg-surface text-primary hover:bg-[var(--primary-soft)] hover:text-[var(--background)]",
-      outline: "border border-[var(--border)] text-primary hover:bg-[var(--primary-soft)] hover:text-[var(--background)]",
+      primary:
+        "bg-primary text-white shadow-soft hover:bg-primary-hover",
+      secondary:
+        "bg-surface text-primary shadow-soft hover:bg-[var(--primary-soft)] hover:text-[var(--background)]",
+      outline:
+        "border border-[var(--border)] bg-transparent text-primary hover:bg-surface-elevated",
     }[variant];
 
     return (

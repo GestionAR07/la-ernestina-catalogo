@@ -4,6 +4,7 @@
 :root {
   --background: #0b100d;
   --surface: #131c17;
+  --surface-elevated: #18241e;
   --primary: #2f6b4f;
   --primary-hover: #3d8061;
   --primary-soft: #8eaa79;
@@ -11,6 +12,10 @@
   --text-secondary: #a8b3ac;
   --border: #273229;
   --accent: #c9b483;
+  --radius-control: 0.5rem;
+  --radius-panel: 0.75rem;
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.22), 0 6px 18px rgb(0 0 0 / 0.16);
+  --shadow-header: 0 1px 0 rgb(39 50 41 / 0.9), 0 8px 24px rgb(0 0 0 / 0.18);
 }
 
 @theme inline {
@@ -41,6 +46,21 @@
     outline: 2px solid var(--primary-soft);
     outline-offset: 2px;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 /* Utility classes using CSS variables (compatibilidad con componentes existentes) */
@@ -53,6 +73,9 @@
   }
   .bg-surface {
     background-color: var(--surface);
+  }
+  .bg-surface-elevated {
+    background-color: var(--surface-elevated);
   }
   .bg-background {
     background-color: var(--background);
@@ -74,5 +97,32 @@
   }
   .scrollbar-thin-x {
     scrollbar-width: thin;
+  }
+  .rounded-control {
+    border-radius: var(--radius-control);
+  }
+  .rounded-panel {
+    border-radius: var(--radius-panel);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-header {
+    box-shadow: var(--shadow-header);
+  }
+  .elevate-panel {
+    background-color: var(--surface-elevated);
+    box-shadow: var(--shadow-soft);
+  }
+  .motion-safe-transition {
+    transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe-transition {
+      transition: none;
+    }
   }
 }
