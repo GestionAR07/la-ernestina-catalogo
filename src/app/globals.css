@@ -34,6 +34,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Header sticky (~4.5–4.75rem) + ≥16px de aire */
+    --site-header-offset: 4.75rem;
+    scroll-padding-top: calc(var(--site-header-offset) + 1rem);
+  }
+
+  @media (min-width: 640px) {
+    html {
+      --site-header-offset: 5rem;
+      scroll-padding-top: calc(var(--site-header-offset) + 1rem);
+    }
   }
 
   body {
@@ -42,17 +52,10 @@
     font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   }
 
-  /* Compensa el header sticky al navegar por anclas */
+  /* Refuerzo por si el ancla apunta a la sección */
   #catalogo,
   #contacto {
-    scroll-margin-top: 5.5rem;
-  }
-
-  @media (min-width: 640px) {
-    #catalogo,
-    #contacto {
-      scroll-margin-top: 6rem;
-    }
+    scroll-margin-top: calc(var(--site-header-offset) + 1rem);
   }
 
   :focus-visible {

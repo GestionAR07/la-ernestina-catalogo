@@ -82,19 +82,21 @@ export function ProductCatalog() {
 
   return (
     <section
-      id="catalogo"
-      className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8"
+      className="mx-auto max-w-6xl px-4 pb-10 pt-6 sm:px-6 lg:px-8"
       aria-labelledby="catalog-heading"
     >
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+      <div
+        id="catalogo"
+        className="mb-6 flex flex-col gap-3 sm:mb-7 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
+      >
+        <div className="min-w-0 sm:max-w-md sm:pt-1">
           <h2
             id="catalog-heading"
-            className="text-2xl font-semibold text-[var(--text-primary)] sm:text-3xl"
+            className="text-2xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-3xl"
           >
             Catálogo
           </h2>
-          <p className="mt-1 text-sm text-[var(--text-secondary)]">
+          <p className="mt-1 max-w-md text-sm leading-relaxed text-[var(--text-secondary)]">
             Elegí categoría, presentación y cantidad para armar tu pedido.
           </p>
         </div>

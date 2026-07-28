@@ -15,10 +15,24 @@ export function CatalogSearch({ value, onChange, resultCount }: CatalogSearchPro
   const hasQuery = value.trim().length > 0;
 
   return (
-    <div className="w-full max-w-xl">
-      <label htmlFor={inputId} className="mb-1.5 block text-sm font-medium text-[var(--text-secondary)]">
-        Buscar productos
-      </label>
+    <div className="w-full sm:max-w-sm sm:shrink-0 lg:max-w-md">
+      <div className="mb-1.5 flex items-baseline justify-between gap-3">
+        <label
+          htmlFor={inputId}
+          className="text-sm font-medium text-[var(--text-secondary)]"
+        >
+          Buscar productos
+        </label>
+        <p
+          id={countId}
+          className="text-xs tabular-nums text-[var(--text-secondary)]"
+          aria-live="polite"
+        >
+          {hasQuery
+            ? `${resultCount} ${resultCount === 1 ? "resultado" : "resultados"}`
+            : `${resultCount} ${resultCount === 1 ? "producto" : "productos"}`}
+        </p>
+      </div>
       <div className="relative">
         <Search
           className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[var(--text-secondary)]"
@@ -45,11 +59,6 @@ export function CatalogSearch({ value, onChange, resultCount }: CatalogSearchPro
           </button>
         ) : null}
       </div>
-      <p id={countId} className="mt-2 text-xs text-[var(--text-secondary)]" aria-live="polite">
-        {hasQuery
-          ? `${resultCount} ${resultCount === 1 ? "resultado" : "resultados"}`
-          : `${resultCount} ${resultCount === 1 ? "producto" : "productos"}`}
-      </p>
     </div>
   );
 }

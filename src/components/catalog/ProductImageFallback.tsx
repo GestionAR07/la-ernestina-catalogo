@@ -42,16 +42,23 @@ export function ProductImageFallback({
 
   return (
     <div
-      className="flex h-full w-full flex-col items-center justify-center gap-2 bg-[linear-gradient(160deg,var(--surface-elevated)_0%,var(--background)_55%,#101813_100%)] px-3 text-center"
+      className="relative flex h-full w-full items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,var(--surface-elevated)_0%,var(--background)_68%)] px-3 text-center"
       role="img"
       aria-label={`${productName}, categoría ${category}`}
     >
-      <span className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-[var(--border)] bg-[var(--surface)]/80 text-[var(--primary-soft)] shadow-soft">
-        <Icon className="h-5 w-5" aria-hidden="true" />
-      </span>
-      <span className="text-[11px] font-medium tracking-wide text-[var(--text-secondary)] uppercase">
-        {label}
-      </span>
+      <Icon
+        className="pointer-events-none absolute top-1/2 left-1/2 h-[4.5rem] w-[4.5rem] -translate-x-1/2 -translate-y-1/2 text-[var(--primary-soft)] opacity-[0.08]"
+        aria-hidden="true"
+        strokeWidth={1.25}
+      />
+      <div className="relative z-10 flex flex-col items-center gap-1.5">
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-control border border-[var(--border)] bg-[var(--surface)]/85 text-[var(--primary-soft)] shadow-soft">
+          <Icon className="h-7 w-7" aria-hidden="true" />
+        </span>
+        <span className="text-xs font-semibold tracking-wide text-[var(--text-secondary)] uppercase">
+          {label}
+        </span>
+      </div>
     </div>
   );
 }

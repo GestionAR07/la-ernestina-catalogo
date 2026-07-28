@@ -46,7 +46,7 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
       aria-label={product.name}
       data-product-id={product.id}
     >
-      <div className="relative aspect-[16/10] sm:aspect-[16/11] border-b border-[var(--border)]">
+      <div className="relative aspect-[16/7] border-b border-[var(--border)] sm:aspect-[2/1]">
         {hasRealImage ? (
           <Image
             src={product.imageUrl!}

@@ -24,11 +24,9 @@ export function SiteFooter() {
   const hasExtraInfo = hasContactBlock || hasHoursBlock || hasPaymentsBlock;
 
   return (
-    <footer
-      id="contacto"
-      className="border-t border-[var(--border)] bg-surface"
-    >
+    <footer className="border-t border-[var(--border)] bg-surface">
       <div
+        id="contacto"
         className={`mx-auto max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:px-8 ${
           hasExtraInfo ? "grid sm:grid-cols-2 lg:grid-cols-3" : "flex flex-col"
         }`}
