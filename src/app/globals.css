@@ -42,6 +42,19 @@
     font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   }
 
+  /* Compensa el header sticky al navegar por anclas */
+  #catalogo,
+  #contacto {
+    scroll-margin-top: 5.5rem;
+  }
+
+  @media (min-width: 640px) {
+    #catalogo,
+    #contacto {
+      scroll-margin-top: 6rem;
+    }
+  }
+
   :focus-visible {
     outline: 2px solid var(--primary-soft);
     outline-offset: 2px;
@@ -97,6 +110,13 @@
   }
   .scrollbar-thin-x {
     scrollbar-width: thin;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
   .rounded-control {
     border-radius: var(--radius-control);
