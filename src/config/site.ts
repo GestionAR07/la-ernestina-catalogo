@@ -13,7 +13,7 @@ export const SITE_DESCRIPTION = "Forrajería & Alimentos";
  */
 export const WHATSAPP_NUMBER = "5490000000000";
 
-/** Etiquetas profesionales mientras faltan datos reales. */
+/** Etiquetas internas — no mostrar al público. */
 export const PENDING = {
   phone: "Teléfono pendiente de configurar",
   address: "Dirección del comercio pendiente de configurar",
@@ -21,9 +21,13 @@ export const PENDING = {
   whatsapp: "WhatsApp pendiente de configurar",
 } as const;
 
-export const PHONE = PENDING.phone;
-export const ADDRESS = PENDING.address;
-export const HOURS = PENDING.hours;
+/**
+ * Datos de contacto públicos.
+ * Dejar vacíos (`""`) hasta recibir valores reales del comercio.
+ */
+export const PHONE = "";
+export const ADDRESS = "";
+export const HOURS = "";
 
 /**
  * Modalidades de pedido disponibles en el drawer.
@@ -36,6 +40,18 @@ export const SOCIALS = {} as const;
 
 /** Medios de pago visibles — vacío hasta confirmación del comercio. */
 export const PAYMENT_METHODS: readonly string[] = [];
+
+const PENDING_VALUES = new Set<string>(Object.values(PENDING));
+
+/** True solo cuando hay un valor real (no vacío ni etiqueta pendiente). */
+export function hasPublicContactValue(value: string | undefined | null): boolean {
+  if (typeof value !== "string") return false;
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  if (PENDING_VALUES.has(trimmed)) return false;
+  if (/pendiente de configurar/i.test(trimmed)) return false;
+  return true;
+}
 
 export const COMMERCIAL_STATUS = {
   whatsappReady: false,

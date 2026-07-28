@@ -1,51 +1,64 @@
 import Image from "next/image";
-import { SITE_DESCRIPTION, SITE_NAME } from "@/config/site";
+import { SITE_DESCRIPTION, SITE_NAME, WHATSAPP_NUMBER } from "@/config/site";
+import { isWhatsAppConfigured } from "@/utils/whatsapp";
 
 /**
  * Hero principal.
- * Nota de rendimiento: el original `hero.png` (~944 KB, contenedor JPEG) se conserva.
- * Esta fase sirve `hero.webp` (~191 KB, calidad 82) para reducir peso percibido sin cambiar el encuadre.
- * AVIF (~94 KB) quedó generado en audit-artifacts para evaluación; no se adoptó aún por compatibilidad/verificación visual.
+ * Imagen: `hero.webp` (~191 KB). Original `hero.png` se conserva como respaldo.
  */
 export function HeroSection() {
+  const showWhatsAppCta = isWhatsAppConfigured(WHATSAPP_NUMBER);
+
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative isolate min-h-[70vh] overflow-hidden border-b border-[var(--border)]"
+      className="relative isolate overflow-hidden border-b border-[var(--border)]"
     >
-      <Image
-        src="/images/hero/hero.webp"
-        alt="Interior y productos de forrajería La Ernestina"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-[var(--background)]/70 to-[var(--background)]/25"
-        aria-hidden="true"
-      />
-      <div className="relative z-10 mx-auto flex min-h-[70vh] w-full max-w-6xl flex-col justify-end px-4 pb-12 pt-28 sm:px-6 lg:px-8">
-        <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-[var(--accent)]">
-          {SITE_DESCRIPTION}
-        </p>
-        <h1
-          id="hero-heading"
-          className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl"
-        >
-          {SITE_NAME}
-        </h1>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
-          Catálogo para armar tu pedido y enviarlo por WhatsApp cuando el
-          comercio configure el contacto.
-        </p>
-        <div className="mt-8">
-          <a
-            href="#catalogo"
-            className="inline-flex min-h-11 items-center justify-center rounded bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-soft)]"
+      <div className="relative min-h-[22rem] sm:min-h-[26rem] md:min-h-[30rem] lg:min-h-[34rem]">
+        <Image
+          src="/images/hero/hero.webp"
+          alt="Mascotas y alimentos de forrajería La Ernestina"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_32%] sm:object-center"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-[var(--background)]/75 to-[var(--background)]/30"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 mx-auto flex min-h-[22rem] w-full max-w-6xl flex-col justify-end px-4 pb-8 pt-24 sm:min-h-[26rem] sm:px-6 sm:pb-10 sm:pt-28 md:min-h-[30rem] lg:min-h-[34rem] lg:px-8 lg:pb-12">
+          <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-[var(--accent)] sm:text-sm">
+            {SITE_DESCRIPTION}
+          </p>
+          <h1
+            id="hero-heading"
+            className="max-w-3xl text-3xl font-bold leading-tight tracking-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl"
           >
-            Ver catálogo
-          </a>
+            {SITE_NAME}
+          </h1>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)] sm:mt-4 sm:text-lg">
+            Alimentos para mascotas y animales de granja. Elegí tus productos y
+            armá tu pedido de forma simple.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
+            <a
+              href="#catalogo"
+              className="inline-flex min-h-11 items-center justify-center rounded-control bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-soft motion-safe-transition hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-soft)]"
+            >
+              Ver productos
+            </a>
+            {showWhatsAppCta ? (
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center justify-center rounded-control border border-[var(--border)] bg-[var(--surface)]/70 px-5 py-2.5 text-sm font-semibold text-[var(--text-primary)] backdrop-blur motion-safe-transition hover:bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-soft)]"
+              >
+                Pedir por WhatsApp
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </section>

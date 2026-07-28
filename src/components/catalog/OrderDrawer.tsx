@@ -22,7 +22,6 @@ import {
   isWhatsAppConfigured,
   openWhatsAppOrder,
 } from "@/utils/whatsapp";
-import { PENDING } from "@/config/site";
 
 interface OrderDrawerProps {
   open: boolean;
@@ -145,7 +144,7 @@ export function OrderDrawer({
         aria-labelledby={titleId}
         tabIndex={-1}
         onKeyDown={onPanelKeyDown}
-        className="relative flex h-full w-full max-w-md flex-col border-l border-[var(--border)] bg-surface shadow-xl"
+        className="relative flex h-full w-full max-w-md flex-col border-l border-[var(--border)] bg-surface-elevated shadow-soft"
       >
         <header className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-4">
           <div>
@@ -311,19 +310,35 @@ export function OrderDrawer({
             </Button>
           </div>
 
-          <Button
-            className="w-full"
-            disabled={isEmpty || !whatsappReady}
-            onClick={onWhatsAppClick}
-            aria-describedby="whatsapp-help"
-          >
-            Continuar por WhatsApp
-          </Button>
-          <p id="whatsapp-help" className="text-xs leading-relaxed text-[var(--text-secondary)]">
-            {whatsappReady
-              ? "Se abrirá WhatsApp con el detalle de tu pedido."
-              : `${PENDING.whatsapp}. El envío permanece bloqueado hasta cargar el número real del comercio.`}
-          </p>
+          {whatsappReady ? (
+            <>
+              <Button
+                className="w-full"
+                disabled={isEmpty}
+                onClick={onWhatsAppClick}
+                aria-describedby="whatsapp-help"
+              >
+                Continuar por WhatsApp
+              </Button>
+              <p
+                id="whatsapp-help"
+                className="text-xs leading-relaxed text-[var(--text-secondary)]"
+              >
+                Se abrirá WhatsApp con el detalle de tu pedido.
+              </p>
+            </>
+          ) : (
+            <div
+              role="status"
+              className="rounded-panel border border-[var(--border)] bg-[var(--background)] px-3 py-3"
+            >
+              <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
+                Podés armar y guardar tu pedido en este dispositivo. El envío por
+                WhatsApp estará disponible cuando se configure el contacto del
+                comercio.
+              </p>
+            </div>
+          )}
         </footer>
       </div>
     </div>
