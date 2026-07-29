@@ -82,7 +82,7 @@ export function ProductCatalog() {
 
   return (
     <section
-      className="mx-auto max-w-6xl px-4 pb-10 pt-6 sm:px-6 lg:px-8"
+      className="pb-10 pt-6"
       aria-labelledby="catalog-heading"
     >
       <div
@@ -92,7 +92,8 @@ export function ProductCatalog() {
         <div className="min-w-0 sm:max-w-md sm:pt-1">
           <h2
             id="catalog-heading"
-            className="text-2xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-3xl"
+            tabIndex={-1}
+            className="text-2xl font-semibold tracking-tight text-[var(--text-primary)] outline-none sm:text-3xl"
           >
             Catálogo
           </h2>
@@ -118,7 +119,7 @@ export function ProductCatalog() {
           <h3 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">
             Los más pedidos
           </h3>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
             {popular.map((product) => (
               <ProductCard
                 key={`popular-${product.id}`}
@@ -154,7 +155,7 @@ export function ProductCatalog() {
             ) : null}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
             {filtered.map((product) => (
               <ProductCard key={product.id} product={product} onAdd={handleAdd} />
             ))}

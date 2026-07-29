@@ -143,9 +143,42 @@
     transition-timing-function: ease;
   }
 
+  .motion-safe-fade-in {
+    animation: order-fade-in 180ms ease-out;
+  }
+
+  .motion-safe-sheet-in {
+    animation: order-sheet-in 220ms ease-out;
+  }
+
+  @keyframes order-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes order-sheet-in {
+    from {
+      opacity: 0.96;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motion-safe-transition {
       transition: none;
+    }
+
+    .motion-safe-fade-in,
+    .motion-safe-sheet-in {
+      animation: none;
     }
   }
 }
